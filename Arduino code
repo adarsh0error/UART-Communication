@@ -1,0 +1,28 @@
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  if (Serial.available()) { 
+    String response = Serial.readStringUntil('\n');
+
+    if (response.length() > 0) {  
+      for (int i = 0; i < response.length(); i++) {
+        char currentChar = response.charAt(i);
+
+        if (currentChar == '*') {
+          Serial.println("");   // Print a blank line for each '*'
+        } else {
+          Serial.print(currentChar);   // Print normal characters without a newline
+        }
+      }
+
+      Serial.println(""); // Final newline to separate responses
+    }
+
+    // Clear buffer
+    while (Serial.available() > 0) {
+      Serial.read();
+    }
+  }
+}
