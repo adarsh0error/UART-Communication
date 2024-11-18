@@ -5,4 +5,4 @@ Then there's an update to this task where basically if I enter hii*adarsh it det
 Input :- hii*adarsh
 Output :- hii
           Adarsh
-          
+ microcontroller used - arduino         
