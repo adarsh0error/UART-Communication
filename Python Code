@@ -1,0 +1,41 @@
+import serial #for UART Communication protocol
+import time
+
+SERIAL_PORT = "COM3" #port in which arduino is connected
+BAUD_RATE = 9600  #baud rate should be same as arduino
+
+def main():
+    try:
+        ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)  
+        time.sleep(2)  # Allow Arduino time to reset
+        print("Connection established with the microcontroller.")
+
+        while True:
+            # Take user input
+            message = input("Enter your message: ")
+            if not message.strip():  # Handle empty input
+                print("Empty input detected. Exiting...")
+                break
+            c=0
+            for i in message:
+                if i=='*':
+                    c+=1
+            # Send the message to the Arduino
+            ser.write((message + "\n").encode('utf-8'))
+
+            # Read all responses from Arduino
+            for k in range(0,c+1):
+                response = ser.readline().decode('utf-8').strip()
+                print(response)
+
+
+    except serial.SerialException as e:
+        print(f"Serial error: {e}")
+    except KeyboardInterrupt:
+        print("\nExiting...")
+    finally:
+        if ser.is_open:
+            ser.close()
+
+if __name__ == "__main__":
+    main()
