@@ -1,23 +1,25 @@
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(9600); //should be same in both arduino and python
 }
 
 void loop() {
-  if (Serial.available()) { 
-    String response = Serial.readStringUntil('\n');
+  if (Serial.available()) {                    //check if any input is available in terminal or not.
+    String response = Serial.readString();
 
     if (response.length() > 0) {  
       for (int i = 0; i < response.length(); i++) {
         char currentChar = response.charAt(i);
 
+        //adding new line by detecting a certian character, "*" in this code
+        
         if (currentChar == '*') {
-          Serial.println("");   // Print a blank line for each '*'
+          Serial.println("");   // Print a blank line for each "*"
         } else {
-          Serial.print(currentChar);   // Print normal characters without a newline
+          Serial.print(currentChar);   // Print normal characters without a new line
         }
       }
 
-      Serial.println(""); // Final newline to separate responses
+      Serial.println(""); // Final new line to separate responses
     }
 
     // Clear buffer
