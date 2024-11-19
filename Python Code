@@ -6,7 +6,7 @@ BAUD_RATE = 9600  #baud rate should be same as arduino
 
 def main():
     try:
-        ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)  
+        ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=5)  
         time.sleep(2)  # Allow Arduino time to reset
         print("Connection established with the microcontroller.")
 
